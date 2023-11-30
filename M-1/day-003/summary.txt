@@ -1,0 +1,20 @@
+#### Version of Elemental Languages for WWW
+ ## CSS
+  - CSS 1~3까지 넘버링으로 네이밍
+ ## HTML
+  - HTML 1~5까지 넘버링으로 네이밍
+ ## Javascript
+  - Javascript는 1~4처럼 넘버링으로 표기하지 않고 ECMA 2015 등처럼 규약명을 붙여 네이밍
+
+#### Basics of Javascript (Node.js)
+ ## 기초 CLI 명령어
+  - node -v => NodeJS의 버전을 표기하는 명령어임. (v18.17.1)
+  - nvm ls => nvm은 nodejs version manager의 약자로, 한 워크스테이션에서 여러개의 NodeJS 버전을 설치하고 관리할 수 있도록 도와준다.
+  - LTS => Long Term Support (Long Term Service 아님 ㅠ) 3년동안은 해당 버전을 LTS로 지정하여 유지하면서 기능 변화나 패치에 대한 의존성 문제에 대한 고민을 줄여준다.
+
+ ## About NodeJS
+  - NodeJS는 백엔드 프론트엔드 뿐만 아니라 기타 시스템을 구현할때에도 다방면으로 사용된다.
+  - NPM (Node Package Manager)를 통해 외부 라이브러리나 프레임워크 등을 워크스테이션에 설치하여 활용할 수 있다.
+  - NVM (Node Version Manager)를 통해 NodeJS 버전을 자유롭게 컨트롤 할 수 있다.
+
+ ## 
