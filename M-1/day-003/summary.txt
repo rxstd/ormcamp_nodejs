@@ -92,4 +92,22 @@
   3. 결국에는 npm install A 명령어 하나 만으로 A B C D 패키지가 전부 설치되게 되는것이다.
 
  ## NodeJS에서의 라이브러리의 사용
-  - 서버에서 사용하는 모듈형 js에서는 [ const moment = require("moment"); ] 과 같이 const 상수로 네이밍을 하고, require 예약어함수로 패키지를 불러온다.
+  - 서버에서 사용하는 모듈형 js에서는 [ const moment = require("moment"); ] 과 같이 const 상수로 네이밍을 하고, require 예약어함수로 패키지를 참조한다.
+
+ ## Moment.JS 라이브러리에 대한 기초
+  - moment({A}).format({B}); 이 코드를 통해 설명해본다.
+  - A 칸에는 포맷을 원하는 DateTime 데이터형 변수를 넣거나, 현재 시간으로 반영하려면 빈칸으로 둔다.
+  - 현재시간 예시 : moment().format(...) / 지정한 시간 예시 : moment(formatTime).format(...)
+  - B 칸에는 표기를 원하는 날짜 포맷을 작성한다 예를 들어 "YYYY-MM-DD HH:mm:ss" 와 같은 24시간 형식 포맷이 있다. (2023-11-30 14:39:05)
+
+ ## dotenv 에 대한 사용목적 및 이해
+  1. .env 파일을 nodeJs 프로젝트 루트폴더에 생성한다.
+  2. .env 파일 내에 상수를 지정한다. (PROJECT_TITLE=DAY_003) 이 예와 같이 대문자를 통해 상수임을 선언한다.
+  3. 그리고 dotenv를 프로젝트 내에서 참조하려면 [ const dotenv = require("dotenv"); ] 이 코드로 먼저 dotenv 라이브러리를 불러오고,
+     [ dotenv.config() ] 를 통해 .env 파일 내의 상수를 읽어오는 식으로 이용한다.
+  4. 지정한 상수는 js 프로젝트 내에서 [ process.env.PROJECT_TITLE ] 과 같이 사용할 수 있다.
+
+ ## 카멜식 (Camel) 변수명 작성
+  - 카멜 == 낙타. 낙타의 등을 보면 첫번째 봉우리가 낮고 두번째 봉우리가 높다.
+  - 낙타 등 봉우리와 비슷한 생김새로 변수명을 작성한다고 하여 카멜식 변수명 작성이라 칭한다.
+  - 예를들어 Username 이라는 이름을 변수로 지정하고 싶으면 userName, Uploadpath라는 이름을 변수로 지정하고싶으면 uploadPath 와 같이 작성하면 된다.
