@@ -68,41 +68,43 @@
       // 호이스팅(hoisting)을 이해해보자.
 
       // var
-      console.log(d); // undefined
-      var d = 1;
-      console.log(d); // 1
+      console.log(d); // 미선언 상태에서 최초 호출. undefined 리턴.
+      var d = 1; // 미선언 상태에서 선언 및 할당.
+      console.log(d); // 1 리턴.
 
       // let
-      //console.log(e); // 오류 발생! :: Uncaught ReferenceError: Cannot access 'e' before initialization
-      let e = 1;
-      console.log(e); // 1
+      //console.log(e); // 미선언 상태에서 최초 호출. 오류 발생! :: Uncaught ReferenceError: Cannot access 'e' before initialization
+      let e = 1; // 미선언 상태에서 선언 및 할당.
+      console.log(e); // 1 리턴.
 
       // const
-      //console.log(f); // 오류 발생! :: Uncaught ReferenceError: Cannot access 'f' before initialization
-      const f = 1;
-      console.log(f); // 1
+      //console.log(f); // 미선언 상태에서 최초 호출. 오류 발생! :: Uncaught ReferenceError: Cannot access 'f' before initialization
+      const f = 1; // 미선언 상태에서 선언 및 할당.
+      console.log(f); // 1 리턴.
 
       // 호이스팅(hoisting)을 이해해보자. (함수)
 
       // var
-      console.log(g); // undefined
+      console.log(g); // undefined 리턴.
       var g = function () {
         console.log("g");
       };
-      g(); // g
 
       // let
       //console.log(h); // 오류 발생! :: Uncaught ReferenceError: Cannot access 'h' before initialization
       let h = function () {
         console.log("h");
       };
-      h(); // h
 
       // const
       //console.log(i); // 오류 발생! :: Uncaught ReferenceError: Cannot access 'i' before initialization
       const i = function () {
         console.log("i");
       };
+
+      g();
+      h();
+      i();
     </script>
     <h1>DAY004</h1>
     <p>DAY004 내용입니다.</p>
