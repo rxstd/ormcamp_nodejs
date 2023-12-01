@@ -42,6 +42,46 @@
       ];
 
       console.log(book11, extraBooks);
+
+      // 비구조화 할당 예시
+      const [test1, test2, test3, test4, test5, test6 = "test6"] = [
+        "test1",
+        "test2",
+        "test3",
+        "test4",
+        "test5",
+      ];
+      console.log(test1, test2, test3, test4, test5, test6);
+
+      // 객체의 비구조화 할당.
+      const techTrend = {
+        fe: "React",
+        be: "Node.js",
+        server: "Linux",
+        rdbms: "PostgreSQL",
+        noSQL: "MongoDB",
+        infra: "AWS",
+        getAuthor: function () {
+          return "강창훈";
+        },
+      };
+
+      // 구조화된 방식으로 객체의 값을 추출해보자.
+      var frontEnd = techTrend.fe;
+      var backEnd = techTrend.be;
+      var serverTech = techTrend.server;
+
+      console.log(frontEnd, backEnd, serverTech);
+
+      // 비구조화된 방식으로 객체의 값을 추출해보자.
+      const { fe, be, server, rdbms, noSQL, infra } = techTrend;
+      console.log(fe, be, server, rdbms, noSQL, infra);
+
+      // 비구조화된 방식으로 객체의 값을 추출해보자. (함수만)
+      const { getAuthor } = techTrend;
+      console.log(getAuthor());
+
+      //비구조화 할당 문법을 사용하는 이유는 보다 적은 코드로 보다 빠르게 코딩할 수 있는 방식을 제공되기 때문.
     </script>
   </body>
 </html>
