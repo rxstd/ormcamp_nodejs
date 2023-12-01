@@ -5,6 +5,17 @@
   </head>
   <body>
     <script>
+        const userName = 'Evans Benedict';
+        const userAge = 25;
+        let userRegion = '의정부';
+
+        //let introduction = '안녕하세요. 저는 ' + userName + '입니다. 나이는 ' + userAge + '살 입니다. ' + userRegion + '에 살고 있습니다.';
+        let introduction = `안녕하세요. 저는 ${userName}입니다. 나이는 ${userAge}살 입니다. ${userRegion}에 살고 있습니다.`;
+
+        console.log(introduction);
+
+        return false;
+        /**
       // var, let, const 의 차이를 정확하게 알아보자.
 
       // var 는 function-scoped 이고, let, const 는 block-scoped 이다.
@@ -131,21 +142,21 @@
       // const newBaseDeliveryFee = 5000;
       // newBaseDeliveryFee = 5000;
 
-      console.log("const로 할당한 기본 배송비", newBaseDeliveryFee);
+      console.log("const로 할당한 기본 배송비 :", newBaseDeliveryFee);
 
       let totalPayPrice = 0;
 
       // ## 기본 배송비를 더해보자.
       totalPayPrice = price + baseDeliveryFee;
 
-      console.log("기본 배송비를 더한 총 결제금액", totalPayPrice);
+      console.log("기본 배송비를 더한 총 결제금액 :", totalPayPrice);
 
       // ## const (상수)와 let (변수) 신규문법은 Block Scope 제약을 가지고 있다.
 
       if (isMale) {
         // ## if (isMale == true) 와 동일, false일 시 if (!isMale)을 사용.
         var msg = "삐빅 남자입니다.";
-        console.log("if Scope 내에서 선언된 msg 변수를 출력합니다.", msg);
+        console.log("if Scope 내에서 선언된 msg 변수 출력 :", msg);
       }
 
       // ## if Scope 내에서 선언된 msg 변수를 출력해보자.
@@ -167,7 +178,7 @@
           "원 추가됩니다. 최종 결제금액은 " +
           totalPayPrice +
           "원 입니다.";
-        console.log("산간지역 메시지 출력", msg);
+        console.log("산간지역 메시지 출력 :", msg);
       }
     </script>
     <h1>DAY004</h1>
