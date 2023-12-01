@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DAY004 - ECMAScript2015</title>
+  </head>
+  <body>
+    <script>
+      // var, let, const 의 차이를 정확하게 알아보자.
+
+      // var 는 function-scoped 이고, let, const 는 block-scoped 이다.
+      // var 는 호이스팅(hoisting)이 일어나지만, let, const 는 호이스팅이 일어나지 않는다.
+      // var 는 재선언이 가능하지만, let, const 는 재선언이 불가능하다.
+      // var과 let은 재할당이 가능하지만, const 는 재할당이 불가능하다.
+
+      // var
+      var a = 1;
+      var a = 2;
+      console.log(a); // 2
+
+      // let
+      let b = 1;
+      b = 2; // 재할당 시도. // 실행가능!
+      //let b = 2; // 재선언 시도. 오류 발생! :: Uncaught SyntaxError: Identifier 'b' has already been declared
+      console.log(b);
+
+      // const
+      const c = 1;
+      //c = 2; // 재할당 시도. 오류 발생! :: Uncaught TypeError: Assignment to constant variable.
+      //const c = 2; // 재선언 시도. 오류 발생! :: Uncaught SyntaxError: Identifier 'c' has already been declared
+      console.log(c);
+
+      // function-scoped를 이해해보자.
+
+      // var
+      function varTest() {
+        var x = 1;
+        if (true) {
+          var x = 2; // 같은 변수 x를 재선언하고 재할당한다.
+          console.log(x); // 2가 출력된다.
+        }
+        console.log(x); // 2가 출력된다. function-scoped 개념이 적용되었기 때문이다.
+      }
+
+      // let
+      function letTest() {
+        let x = 1;
+        if (true) {
+          let x = 2; // 다른 변수 x를 재선언하고 재할당한다.
+          console.log(x); // 2가 출력된다.
+        }
+        console.log(x); // 위에서 2가 출력되었지만, 여기서는 1이 출력된다. block-scoped 개념이 적용되었기 때문이다.
+      }
+
+      // const
+      function constTest() {
+        const x = 1;
+        if (true) {
+          const x = 2; // 다른 변수 x를 재선언하고 재할당한다.
+          console.log(x); // 2가 출력된다.
+        }
+        console.log(x); // 이 역시도 let처럼 위에서 2가 출력되었지만, 여기서는 1이 출력된다.
+      }
+
+      varTest(); // if블록 안에서 2 출력, 최종적으로 외부선언시 2 출력. (function-scoped)
+      letTest(); // if블록 안에서 2 출력, 최종적으로 외부선언시 1 출력. (block-scoped)
+      constTest(); // if블록 안에서 2 출력, 최종적으로 외부선언시 1 출력. (block-scoped)
+
+      // 호이스팅(hoisting)을 이해해보자.
+
+      // var
+      console.log(d); // undefined
+      var d = 1;
+      console.log(d); // 1
+
+      // let
+      //console.log(e); // 오류 발생! :: Uncaught ReferenceError: Cannot access 'e' before initialization
+      let e = 1;
+      console.log(e); // 1
+
+      // const
+      //console.log(f); // 오류 발생! :: Uncaught ReferenceError: Cannot access 'f' before initialization
+      const f = 1;
+      console.log(f); // 1
+
+      // 호이스팅(hoisting)을 이해해보자. (함수)
+
+      // var
+      console.log(g); // undefined
+      var g = function () {
+        console.log("g");
+      };
+      g(); // g
+
+      // let
+      //console.log(h); // 오류 발생! :: Uncaught ReferenceError: Cannot access 'h' before initialization
+      let h = function () {
+        console.log("h");
+      };
+      h(); // h
+
+      // const
+      //console.log(i); // 오류 발생! :: Uncaught ReferenceError: Cannot access 'i' before initialization
+      const i = function () {
+        console.log("i");
+      };
+    </script>
+    <h1>DAY004</h1>
+    <p>DAY004 내용입니다.</p>
+  </body>
+</html>
