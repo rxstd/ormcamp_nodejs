@@ -6,6 +6,10 @@ router.get("/", function (req, res, next) {
   res.render("index", { title: "Evans's App" });
 });
 
+router.get("/login", function (req, res, next) {
+  res.render("login", { title: "Evans's App" });
+});
+
 router.get("/test/:id", function (req, res, next) {
   res.render("index", { title: req.params.id });
 });
