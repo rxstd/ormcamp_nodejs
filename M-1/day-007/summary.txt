@@ -33,3 +33,41 @@
 
  ## 인터넷 주소의 구성
   - 통신규약://특정웹사이트(호스트).도메인주소(웹서버주소):포트번호/컨트롤러명(라우터)/라우팅메소드(액션)
+
+ ## Express에서 res에 대한 함수들 정리
+  - res.send() : 문자열을 응답함.
+  - res.sendFile() : 파일을 응답함.
+  - res.json() : JSON 형태의 데이터를 응답함.
+  - res.render() : 템플릿 엔진을 통해 렌더링된 HTML을 응답함.
+  - res.redirect() : 특정 경로로 리다이렉트함.
+
+ ## Express에서 req에 대한 함수들 정리
+  - req.params : URL의 파라미터를 읽어옴.
+  - req.query : URL의 쿼리스트링을 읽어옴.
+  - req.body : POST 요청의 본문을 읽어옴.
+  - req.get() : 헤더의 값을 읽어옴.
+
+ ## HTML의 form 태그 내의 요소들 정리
+  - form 태그 : 사용자의 입력을 받아 서버로 전송하는 역할을 함.
+  - form action 속성 : form 태그 내의 요소들의 데이터를 전송할 서버의 주소를 지정함. (<form ... action="/auth/login"> 와 같이 사용)
+  - form method 속성 : form 태그 내의 요소들의 데이터를 전송할 서버의 통신규약을 지정함. (<form ... method="POST"> 와 같이 사용)
+
+ ## HTTP 요청 방식 정리
+  - GET : 데이터를 조회하기 위해 서버에 요청하는 방식으로, URL에 데이터를 포함하여 전송함.
+  - POST : 데이터를 생성하기 위해 서버에 요청하는 방식으로, URL에 데이터를 포함하지 않고 본문에 데이터를 포함하여 전송함.
+  - PUT : 데이터를 수정하기 위해 서버에 요청하는 방식으로, URL에 데이터를 포함하지 않고 본문에 데이터를 포함하여 전송함.
+  - DELETE : 데이터를 삭제하기 위해 서버에 요청하는 방식으로, URL에 데이터를 포함하여 전송함.
+  - OPTION : 서버에 특정 요청을 하기 전에 통신 옵션을 설명하기 위해 서버에 요청하는 방식으로, URL에 데이터를 포함하지 않고 본문에 데이터를 포함하여 전송함.
+  - PATCH : 데이터를 부분적으로 수정하기 위해 서버에 요청하는 방식으로, URL에 데이터를 포함하지 않고 본문에 데이터를 포함하여 전송함.
+
+ ## HTTP 응답 상태 코드 정리
+  - 1xx : 처리중 (100 Continue, 101 Switching Protocols)
+  - 2xx : 성공 (200 OK, 201 Created, 202 Accepted, 204 No Content)
+  - 3xx : 리다이렉션 완료 (301 Moved Permanently, 302 Found, 304 Not Modified)
+  - 4xx : 클라이언트 오류 (400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found)
+  - 5xx : 서버 오류 (500 Internal Server Error, 502 Bad Gateway, 503 Service Unavailable)
+
+ ## 도메인 주소에 대한 구성
+  - DNS(Domain Name System) : 도메인 주소를 IP 주소로 변환하는 시스템.
+  - DNS Server : 도메인 주소를 IP 주소로 변환하는 서버로, DNS 서버에 도메인 주소를 입력하면 IP 주소를 반환함.
+  - 도메인 주소 : IP 주소를 기억하기 어려워서 만든 문자열로, 도메인 주소를 통해 IP 주소를 찾아감.

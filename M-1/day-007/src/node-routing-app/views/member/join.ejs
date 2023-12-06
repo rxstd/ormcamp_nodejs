@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>무신사 회원가입</title>
+    <style>
+      .checklabels {
+        font-size: 14px;
+      }
+
+      .gotoNext {
+        border: 1px solid #0078ff;
+        background-color: #0078ff;
+        color: #fff;
+        border-radius: 5px;
+        padding: 15px 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>환영합니다!<br />무신사에 가입하시려면<br />약관에 동의해 주세요.</h1>
+    <input type="checkbox" id="checkall" onclick="toggleAll();" />
+    <b> 약관 전체 동의하기 (선택 동의 포함)</b>
+    <br /><br />
+
+    <input type="checkbox" id="check_01" />
+    <span class="checklabels"> [필수] 만 14세 이상입니다.</span>
+    <br /><br />
+
+    <input type="checkbox" id="check_02" />
+    <span class="checklabels"> [필수] 무신사, 무신사 스토어 이용 약관</span>
+    <br /><br />
+
+    <input type="checkbox" id="check_03" />
+    <span class="checklabels"> [필수] 개인정보 수집 및 이용 동의</span>
+    <br /><br />
+
+    <input type="checkbox" id="check_04" />
+    <span class="checklabels"> [필수] 광고성 정보 수신 동의</span>
+    <br /><br />
+
+    <input type="checkbox" id="check_05" />
+    <span class="checklabels"> [필수] 개인정보 수집 및 이용 동의</span>
+    <br /><br /><br /><br /><br /><br />
+    <button type="button" class="gotoNext" onclick="gotoEntry()">
+      동의하고 본인인증하기
+    </button>
+    <script>
+      function toggleAll() {
+        // 체크박스의 상태를 가져온다.
+        var checkAll = document.getElementById("checkall").checked;
+
+        // 체크박스의 상태에 따라 모든 체크박스의 상태를 변경한다.
+        document.getElementById("check_01").checked = checkAll;
+        document.getElementById("check_02").checked = checkAll;
+        document.getElementById("check_03").checked = checkAll;
+        document.getElementById("check_04").checked = checkAll;
+        document.getElementById("check_05").checked = checkAll;
+      }
+
+      function gotoEntry() {
+        let restricted = false;
+
+        if (document.getElementById("check_01").checked == false) {
+          restricted = true;
+        }
+        if (document.getElementById("check_02").checked == false) {
+          restricted = true;
+        }
+        if (document.getElementById("check_03").checked == false) {
+          restricted = true;
+        }
+        if (document.getElementById("check_04").checked == false) {
+          restricted = true;
+        }
+        if (document.getElementById("check_05").checked == false) {
+          restricted = true;
+        }
+
+        if (restricted) {
+          alert("약관에 동의해 주세요.");
+        } else {
+          location.href = "/member/entry";
+        }
+      }
+    </script>
+  </body>
+</html>

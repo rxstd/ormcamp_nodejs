@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>무신사 회원가입</title>
+    <style>
+      .checklabels {
+        font-size: 12px;
+      }
+
+      input {
+        width: 230px;
+        padding: 6px 10px;
+      }
+
+      .gotoNext {
+        border: 1px solid #0078ff;
+        background-color: #0078ff;
+        color: #fff;
+        border-radius: 5px;
+        padding: 15px 0px;
+        width: 255px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>무신사 회원가입<br />정보를 입력해 주세요.</h1>
+    <form action="/member/entry" method="post" onsubmit="fnCheckForm()">
+      <b class="checklabels">아이디</b> <br />
+      <input type="text" id="username" name="username" />
+      <br /><br />
+
+      <b class="checklabels">비밀번호</b>
+      <br />
+      <input type="password" id="password" name="password" />
+      <br /><br />
+
+      <b class="checklabels">이메일</b> <br />
+      <input type="email" id="email" name="email" />
+      <br /><br />
+
+      <b class="checklabels">전화번호</b> <br />
+      <input type="text" id="phone" name="phone" />
+      <br /><br /><br /><br />
+      <button type="button" class="gotoNext" onclick="fnCheckForm()">
+        회원가입 하기
+      </button>
+    </form>
+    <script>
+      function fnCheckForm() {
+        var username = document.getElementById("username");
+        var password = document.getElementById("password");
+        var email = document.getElementById("email");
+        var phone = document.getElementById("phone");
+
+        if (username.value.trim().length === 0) {
+          alert("아이디를 입력하세요.");
+          username.focus();
+          return false;
+        }
+
+        if (password.value.trim().length === 0) {
+          alert("비밀번호를 입력하세요.");
+          password.focus();
+          return false;
+        }
+
+        if (email.value.trim().length === 0) {
+          alert("이메일을 입력하세요.");
+          email.focus();
+          return false;
+        }
+
+        if (phone.value.trim().length === 0) {
+          alert("전화번호를 입력하세요.");
+          phone.focus();
+          return false;
+        }
+      }
+    </script>
+  </body>
+</html>
