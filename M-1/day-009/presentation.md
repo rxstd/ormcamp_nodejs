@@ -11,8 +11,6 @@
 
 ## **Git Flow 전략 (Git Flow Strategy)**
 
-[##_Image|kage@dYMiJ1/btsBCoD9I38/Ti45mS6qKbRBkr7KC4XpiK/img.png|CDM|1.3|{"originWidth":1080,"originHeight":693,"style":"alignCenter","caption":"Git Flow 전략을 시각적으로 정리해둔 이미지 / 출처 : https://velog.io/@jspp120/Git-Branch-\b전략","filename":"image.png"}_##]
-
 #### **개요**
 
 - Git Flow는 2010년에 **Vincent Driessen**이 제안한 Git Branch 전략 중 하나임.
@@ -60,8 +58,6 @@
 ---
 
 ## **Github Flow 전략 **(Github Flow Strategy)\*\*\*\*
-
-[##_Image|kage@2ApS6/btsBFGDRFe4/VqTEUjXKT7nSDVQg8buIk0/img.png|CDM|1.3|{"originWidth":1280,"originHeight":309,"style":"alignCenter","caption":"Github Flow 전략을 시각적으로 정리해둔 이미지 / 출처 : https://velog.io/@jspp120/Git-Branch-\b전략","filename":"image-1.png"}_##]
 
 #### **개요**
 
