@@ -57,7 +57,7 @@
 
 ---
 
-## **Github Flow 전략 **(Github Flow Strategy)\*\*\*\*
+## **Github Flow 전략 **(Github Flow Strategy)****
 
 #### **개요**
 
