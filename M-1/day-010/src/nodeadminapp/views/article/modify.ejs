@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>게시글 수정</title>
+  </head>
+  <body>
+    <style>
+      label {
+        display: inline-block;
+        width: 100px;
+      }
+
+      input[type="text"],
+      textarea {
+        width: 300px;
+        padding: 5px;
+        border: 1px solid #ccc;
+      }
+
+      button {
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        cursor: pointer;
+      }
+    </style>
+    <h1>게시글 수정</h1>
+    <form action="/articles/modify/<%= article.idx %>" method="post">
+      <p>
+        <label for="title">제목</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          value="<%= article.title %>"
+        />
+      </p>
+      <p>
+        <label for="writer">작성자</label>
+        <input
+          type="text"
+          name="writer"
+          id="writer"
+          value="<%= article.writer %>"
+        />
+      </p>
+      <p>
+        <label for="content">내용</label>
+        <textarea name="content" id="content" cols="30" rows="10">
+<%= article.content %>
+</textarea
+        >
+      </p>
+      <p>
+        <label for="display">게시여부</label>
+        <input type="radio" name="display" id="display" value="Y" />
+        <label for="display">게시</label>
+        <input type="radio" name="display" id="display" value="N" />
+        <label for="display">게시안함</label>
+      </p>
+      <p>
+        <button type="submit">작성</button>
+        <button type="button" onclick="location.href='/articles'">목록</button>
+      </p>
+      <script>
+        if ("<%= article.display %>" === "true") {
+          document.querySelector('input[value="Y"]').checked = true;
+        } else {
+          document.querySelector('input[value="N"]').checked = true;
+        }
+      </script>
+    </form>
+  </body>
+</html>

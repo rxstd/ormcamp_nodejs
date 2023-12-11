@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>게시글 목록</title>
+  </head>
+  <body>
+    <h1>게시글 목록</h1>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid black;
+        padding: 10px;
+      }
+
+      th {
+        background-color: #eee;
+      }
+
+      a {
+        text-decoration: none;
+      }
+    </style>
+    <a href="/articles/create">게시글 작성</a>
+    <table>
+      <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>게시여부</th>
+        <th>조회수</th>
+      </tr>
+      <% for(var i=0; i < articles.length; i++) { %>
+      <tr>
+        <td><%= articles[i].idx %></td>
+        <td>
+          <a href="/articles/view/<%= articles[i].idx %>"
+            ><%= articles[i].title %></a
+          >
+        </td>
+        <td><%= articles[i].writer %></td>
+        <td><%= new Date(articles[i].createdAt).toLocaleString() %></td>
+        <td><%= articles[i].display %></td>
+        <td><%= articles[i].hit %></td>
+      </tr>
+      <% } %>
+    </table>
+  </body>
+</html>
