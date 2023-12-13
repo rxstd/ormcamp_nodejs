@@ -178,16 +178,33 @@ function updateChannel(channel) {
 }
 
 function addChannel(channel) {
-  channel.id = channelDB[channelDB.length - 1].id + 1;
-  channelDB.push(channel);
-  return channel;
+  let newChannel = {};
+
+  newChannel.channel_id = channelDB[channelDB.length - 1].channel_id + 1;
+  newChannel.community_id = channel.community_id;
+  newChannel.channel_code = channel.channel_code;
+  newChannel.channel_name = channel.channel_name;
+  newChannel.channel_img_path = channel.channel_img_path;
+  newChannel.channel_desc = channel.channel_desc;
+  newChannel.channel_state_code = channel.channel_state_code;
+  newChannel.reg_date = channel.reg_date;
+  newChannel.reg_member_id = channel.reg_member_id;
+  newChannel.edit_date = channel.edit_date;
+  newChannel.edit_member_id = channel.edit_member_id;
+
+  channelDB.push(newChannel);
+  return newChannel;
 }
 
 function deleteChannel(id) {
   id = Number(id);
+  //삭제하기
   const index = channelDB.findIndex((channel) => channel.channel_id === id);
+
+  let data = channelDB[index];
+
   channelDB.splice(index, 1);
-  return channelDB[index];
+  return data;
 }
 
 function getChatMembersbyChannelId(id) {

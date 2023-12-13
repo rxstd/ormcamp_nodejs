@@ -9,15 +9,6 @@ dotenv.config();
 
 const webTitle = process.env.PROJECT_TITLE;
 
-// -routes\channelAPI.js - 채널/채팅 정보 관리 RESTful API 라우팅 기능 제공
-// http://localhost:3001/api/channel
-// ㄴrouter.get('/all') : 전체 채널 목록 데이터 조회
-// ㄴrouter.post('/create') : 신규 채널정보 데이터 등록처리
-// ㄴrouter.post('/modify): 기존 채널정보 데이터 수정처리
-// ㄴrouter.post('/delete'),기존 채널정보 데이터 삭제처리
-// ㄴrouter.get('/:cid') : 단일 채널정보 데이터 조회
-
-// 전체 채널 목록 데이터 조회
 router.get("/all", userMiddleware, function (req, res, next) {
   const channelList = chatStore.getChannels();
   try {
@@ -26,20 +17,6 @@ router.get("/all", userMiddleware, function (req, res, next) {
     res.json({ message: "채널 목록 조회에 실패했습니다.", data: {} });
   }
 });
-
-// 신규 채널정보 데이터 등록처리
-// 아래는 채널 스키마
-// channel_id
-// community_id
-// channel_code
-// channel_name
-// channel_img_path
-// channel_desc
-// channel_state_code
-// reg_date
-// reg_member_id
-// edit_date
-// edit_member_id
 
 router.post("/create", userMiddleware, function (req, res, next) {
   const community_id = req.body.community_id;
@@ -51,7 +28,7 @@ router.post("/create", userMiddleware, function (req, res, next) {
   const reg_member_id = req.body.reg_member_id;
   const edit_member_id = req.body.edit_member_id;
 
-  const channel = chatStore.createChannel(
+  const channel = chatStore.addChannel({
     community_id,
     channel_code,
     channel_name,
@@ -59,8 +36,8 @@ router.post("/create", userMiddleware, function (req, res, next) {
     channel_desc,
     channel_state_code,
     reg_member_id,
-    edit_member_id
-  );
+    edit_member_id,
+  });
 
   if (channel) {
     res.json({ message: "채널정보 등록에 성공했습니다.", data: channel });
@@ -69,7 +46,6 @@ router.post("/create", userMiddleware, function (req, res, next) {
   }
 });
 
-// 기존 채널정보 데이터 수정처리
 router.post("/modify", userMiddleware, function (req, res, next) {
   const channel_id = req.body.channel_id;
   const community_id = req.body.community_id;
@@ -80,7 +56,7 @@ router.post("/modify", userMiddleware, function (req, res, next) {
   const channel_state_code = req.body.channel_state_code;
   const edit_member_id = req.body.edit_member_id;
 
-  const channel = chatStore.updateChannel(
+  const channel = chatStore.updateChannel({
     channel_id,
     community_id,
     channel_code,
@@ -88,8 +64,8 @@ router.post("/modify", userMiddleware, function (req, res, next) {
     channel_img_path,
     channel_desc,
     channel_state_code,
-    edit_member_id
-  );
+    edit_member_id,
+  });
 
   if (channel) {
     res.json({ message: "채널정보 수정에 성공했습니다.", data: channel });
@@ -98,7 +74,6 @@ router.post("/modify", userMiddleware, function (req, res, next) {
   }
 });
 
-// 기존 채널정보 데이터 삭제처리
 router.post("/delete", userMiddleware, function (req, res, next) {
   const channel_id = req.body.channel_id;
 

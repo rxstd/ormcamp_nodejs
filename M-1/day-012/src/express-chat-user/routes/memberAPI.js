@@ -46,13 +46,15 @@ router.post("/modify", userMiddleware, function (req, res, next) {
 router.post("/delete", userMiddleware, function (req, res, next) {
   const member_id = req.body.member_id;
 
-  const member = memberStore.deleteUser(member_id);
-
-  if (member) {
-    res.json({ message: "회원정보 삭제에 성공했습니다.", data: member });
-  } else {
+  if (!memberStore.getUserById(member_id)) {
     res.json({ message: "회원정보 삭제에 실패했습니다.", data: {} });
   }
+
+  memberStore.deleteUser(member_id);
+
+  const member = memberStore.getUsers();
+
+  res.json({ message: "회원정보 삭제에 성공했습니다.", data: member });
 });
 
 router.get("/:mid", userMiddleware, function (req, res, next) {
