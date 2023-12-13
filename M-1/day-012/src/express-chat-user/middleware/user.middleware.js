@@ -1,11 +1,12 @@
 const adminAuth = (req, res, next) => {
-  console.log(req.session);
-  if (req.session != undefined) {
-    if (!req.session.member_id) {
+  if (!req.originalUrl.includes("/api/")) {
+    if (req.session != undefined) {
+      if (!req.session.member_id) {
+        return res.redirect("/login");
+      }
+    } else {
       return res.redirect("/login");
     }
-  } else {
-    return res.redirect("/login");
   }
   next();
 };
