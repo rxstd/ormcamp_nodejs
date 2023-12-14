@@ -1,0 +1,31 @@
+#### 반응형 웹 개발에 대한 개론.
+ ## 1. 반응형 웹이란?
+  - 반응형 웹이란, 웹 사이트를 PC, 모바일, 태블릿 등 다양한 기기에 맞게 최적화하여 보여주는 기술을 말한다.
+  - 반응형 웹은 기기의 종류에 따라 다른 HTML을 제공하는 것이 아니라, 하나의 HTML을 제공하고 CSS를 이용하여 기기에 맞게 화면을 최적화한다.
+
+ ## 2. 반응형 웹의 장점
+  - 하나의 HTML을 제공하기 때문에, 유지보수가 편리하고, SEO에 유리하다.
+
+ ## 3. 반응형 웹 개발을 위한 CSS 프레임워크
+  - 반응형 웹 개발을 위해는 media query를 사용하여 화면의 크기에 따라 CSS를 다르게 적용해야 한다.
+  - 하지만, media query를 사용하여 CSS를 작성하는 것은 번거롭다.
+  - 이를 해결하기 위해 CSS 프레임워크를 사용한다.
+  - 대표적인 CSS 프레임워크로는 Bootstrap, Foundation 등이 있다.
+
+ ## 4. Bootstrap
+  - Bootstrap은 반응형 웹 개발을 위한 CSS 프레임워크이다.
+  - Bootstrap에서 사용하는 div 태그의 class 속성을 이용하여 반응형 웹을 개발할 수 있다.
+  - col-1, col-2, col-3, col-4, col-5, col-6, col-7, col-8, col-9, col-10, col-11, col-12
+  - col-sm-1, col-sm-2, col-sm-3, col-sm-4, col-sm-5, col-sm-6, col-sm-7, col-sm-8, col-sm-9, col-sm-10, col-sm-11, col-sm-12
+  - col-md-1, col-md-2, col-md-3, col-md-4, col-md-5, col-md-6, col-md-7, col-md-8, col-md-9, col-md-10, col-md-11, col-md-12
+  - col-lg-1, col-lg-2, col-lg-3, col-lg-4, col-lg-5, col-lg-6, col-lg-7, col-lg-8, col-lg-9, col-lg-10, col-lg-11, col-lg-12
+  - col-xl-1, col-xl-2, col-xl-3, col-xl-4, col-xl-5, col-xl-6, col-xl-7, col-xl-8, col-xl-9, col-xl-10, col-xl-11, col-xl-12
+  - 위 class 속성을 이용하여 화면의 크기에 따라 다른 CSS를 적용할 수 있다. 예) <div class="col-4"></div>
+
+ ## 5. Bootstrap의 Grid System
+  - Bootstrap은 12개의 column을 가지고 있다.
+  - 화면의 크기에 따라 column의 개수를 조절하여 반응형 웹을 개발할 수 있다.
+  - sm, md, lg, xl을 이용하여 화면의 크기를 지정할 수 있다.
+  - sm은 small, md는 medium, lg는 large, xl은 extra large의 약자이다.
+  - sm은 576px 이상, md는 768px 이상, lg는 992px 이상, xl은 1200px 이상의 화면을 의미한다.
+  - 예) <div class="col-sm-4 col-md-3 col-lg-2 col-xl-1"></div>
