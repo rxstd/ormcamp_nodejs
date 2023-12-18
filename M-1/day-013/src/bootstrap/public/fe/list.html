@@ -18,7 +18,50 @@
   <body>
     <div id="wrapper">
       <!--좌측 메뉴 영역-->
-      <% include ../common/left.ejs %>
+      <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+          <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+              <div class="dropdown profile-element">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                  <span class="block m-t-xs font-bold">Example user</span>
+                  <span class="text-muted text-xs block"
+                    >menu <b class="caret"></b
+                  ></span>
+                </a>
+                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                  <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                </ul>
+              </div>
+              <div class="logo-element">IN+</div>
+            </li>
+            <li class="active">
+              <a href="login.html"
+                ><i class="fa fa-th-large"></i>
+                <span class="nav-label">로그인</span></a
+              >
+            </li>
+            <li>
+              <a href="entry.html"
+                ><i class="fa fa-th-large"></i>
+                <span class="nav-label">회원가입</span>
+              </a>
+            </li>
+            <li>
+              <a href="login.html"
+                ><i class="fa fa-th-large"></i>
+                <span class="nav-label">게시글목록</span>
+              </a>
+            </li>
+            <li>
+              <a href="write.html"
+                ><i class="fa fa-th-large"></i>
+                <span class="nav-label">게시글작성</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
       <!--우측 영역-->
       <div id="page-wrapper" class="gray-bg">
@@ -93,12 +136,16 @@
                     <label class="control-label" for="boardTypeCode"
                       >게시판타입</label
                     >
-                    <select name="boardTypeCode" id="boardTypeCode" class="form-control">
-                        <option value="" <%= schOption.boardTypeCode === '' ? 'selected' : '' %>>전체</option>
-                        <option value="1" <% if (schOption.boardTypeCode === '1') { %>selected<%}%>>공지게시판</option>
-                        <option value="2" <%= schOption.boardTypeCode === '2' ? 'selected' : '' %>>기술블로깅</option>
-                        <option value="3" <% if (schOption.boardTypeCode === '3') { %>selected<%}%>>자유게시판</option>
-                      </select>
+                    <select
+                      name="boardTypeCode"
+                      id="boardTypeCode"
+                      class="form-control"
+                    >
+                      <option value="">전체</option>
+                      <option value="1">공지게시판</option>
+                      <option value="2">기술블로깅</option>
+                      <option value="3">자유게시판</option>
+                    </select>
                   </div>
                 </div>
                 <div class="col-sm-4">
@@ -109,7 +156,6 @@
                       class="form-control"
                       name="title"
                       id="title"
-                      value="<%= schOption.title %>"
                     />
                   </div>
                 </div>
@@ -122,16 +168,16 @@
                       class="form-control"
                       value="<%= schOption.isDisplay %>"
                     >
-                      <option value="" <%= schOption.isDisplay === '' ? 'selected' : '' %>>전체</option>
-                      <option value="1" <%= schOption.isDisplay === '1' ? 'selected' : '' %>>Y</option>
-                      <option value="0" <%= schOption.isDisplay === '0' ? 'selected' : '' %>>N</option>
+                      <option value="">전체</option>
+                      <option value="1">Y</option>
+                      <option value="0">N</option>
                     </select>
                   </div>
                 </div>
               </div>
               <div class="text-center">
                 <button type="submit" class="btn btn-info">조회</button>
-                <a href="/article/create" class="btn btn-danger"
+                <a href="/fe/create.html" class="btn btn-danger"
                   >신규게시글 작성</a
                 >
               </div>
@@ -171,36 +217,7 @@
                           <th width="10%">등록일자</th>
                         </tr>
                       </thead>
-                      <tbody class="hoverTblBody">
-                        <% for (let i = 0; i < articleDB.length; i++) { %>
-
-                        <tr>
-                          <td><%= articleDB[i].article_id %></td>
-                          <td>
-                            <% if (articleDB[i].board_type_code == 1) { %>
-                            공지게시판 <% } else if
-                            (articleDB[i].board_type_code == 2) { %> 기술블로깅
-                            <% } else if (articleDB[i].board_type_code == 3) {
-                            %> 자유게시판 <% } %>
-                          </td>
-                          <td>
-                            <a
-                              href="/article/modify/<%= articleDB[i].article_id %>"
-                              ><%= articleDB[i].title %></a
-                            >
-                          </td>
-                          <td><%= articleDB[i].view_count %></td>
-                          <td><%= articleDB[i].ip_address %></td>
-                          <td>
-                            <% if (articleDB[i].is_display_code == 1) { %>
-                            게시함 <% } else if (articleDB[i].is_display_code !=
-                            1 ) { %> 게시안함 <% } %>
-                          </td>
-                          <td><%= articleDB[i].reg_date.split(' ')[0] %></td>
-                        </tr>
-
-                        <% } %>
-                      </tbody>
+                      <tbody class="hoverTblBody" id="articleList"></tbody>
                     </table>
                   </div>
                 </div>
@@ -232,6 +249,54 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <script></script>
+    <script>
+      $.get("http://localhost:3000/api/article/all", function (response) {
+        console.log(response);
+        var articleList = response.data;
+        //var articleListHtml = '';
+        //for (var i = 0; i < articleList.length; i++) {
+        //    var article = articleList[i];
+        //    articleListHtml += '<tr>';
+        //    articleListHtml += '<td>' + article.article_id + '</td>';
+        //    articleListHtml += '<td>' + article.board_type_code + '</td>';
+        //    articleListHtml += '<td>' + article.title + '</td>';
+        //    articleListHtml += '<td>' + article.view_count + '</td>';
+        //    articleListHtml += '<td>' + article.ip_address + '</td>';
+        //    articleListHtml += '<td>' + article.is_display_code + '</td>';
+        //    articleListHtml += '<td>' + article.reg_date + '</td>';
+        //    articleListHtml += '</tr>';
+        //}
+        //$('#articleList').html(articleListHtml);
+
+        for (var i = 0; i < articleList.length; i++) {
+          var article = articleList[i];
+          let articleListHtml = `
+                    <tr>
+                        <td>${article.article_id}</td>
+                        <td>${article.board_type_code}</td>
+                        <td><a href="/fe/modify.html?aid=${article.article_id}">${article.title}</a></td>
+                        <td>${article.view_count}</td>
+                        <td>${article.ip_address}</td>
+                        <td>${article.is_display_code}</td>
+                        <td>${article.reg_date}</td>
+                    </tr>
+                `;
+          $("#articleList").append(articleListHtml);
+        }
+      });
+
+      $(document).ready(function () {
+        // POST PAYLOAD :: POST로 넘어온 값 받아오기
+        // boardTypeCode
+        // title
+        // isDisplay
+
+        const payload = {
+          boardTypeCode: $("#boardTypeCode").val(),
+          title: $("#title").val(),
+          isDisplay: $("#isDisplay").val(),
+        };
+      });
+    </script>
   </body>
 </html>

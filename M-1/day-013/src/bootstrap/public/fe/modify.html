@@ -123,7 +123,7 @@
         </div>
 
         <!--우측 콘텐츠 영역 -->
-        <form action="/article/create" method="post" id="articleForm">
+        <form action="/article/modify" method="post" id="articleForm">
         <div class="wrapper wrapper-content">
           <div class="ibox-content m-b-sm border-bottom">
             <div class="row">
@@ -147,7 +147,7 @@
               <div class="col-sm-12">
                 <div class="form-group">
                   <label class="control-label">글 제목</label>
-                  <input type="text" class="form-control" name="title" id="title" />
+                  <input type="text" class="form-control" name="title" id="title" value="" />
                 </div>
               </div>
             </div>
@@ -165,7 +165,7 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label class="control-label">게시글유형</label>
-                  <input type="text" class="form-control" name="articleTypeCode" id="articleTypeCode" />
+                  <input type="text" class="form-control" name="articleTypeCode" id="articleTypeCode" value="" />
                 </div>
               </div>
               <div class="col-sm-4">
@@ -185,7 +185,7 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label class="control-label">작성자명</label>
-                  <input type="text" class="form-control" name="writer" id="writer" />
+                  <input type="text" class="form-control" name="writer" id="writer" value="" />
                 </div>
               </div>
             </div>
@@ -193,6 +193,7 @@
             </div>
             <div class="text-center">
               <button type="submit" class="btn btn-primary">저장</button>
+              <a href="#" class="btn btn-danger" id="deleteBtn">삭제</a>
               <a href="/article/list" class="btn btn-info">목록</a>
             </div>
           </div>
@@ -223,6 +224,35 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script>
+        const aidx = location.search.split("=")[1];
+
+        $("#deleteBtn").click(function(){
+            if (confirm("정말 삭제하시겠습니까?")) {
+                $.ajax({
+                    url: "/api/article/" + aidx,
+                    type: "DELETE",
+                    success: function(data){
+                        alert("삭제되었습니다.");
+                        location.href = "/fe/list.html";
+                    }
+                })
+            }
+        });
+
+        $(document).ready(function(){
+            // ?article_id
+
+            $.get("/api/article/" + aidx, function(data){
+                const article = data.data[0];
+                $('#boardTypeCode').val(article.board_type_code),
+                $('#title').val(article.title),
+                $('#content').val(article.contents),
+                $('#articleTypeCode').val(article.article_type_code),
+                $('#isDisplay').val(article.is_display_code),
+                $('#writer').val(article.edit_member_id)
+            });
+        });
+
         $("#articleForm").submit(function(){
             if ($("#boardTypeCode").val() == "") {
                 alert("게시판 타입을 선택하세요.");

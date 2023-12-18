@@ -223,6 +223,15 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script>
+        // boardTypeCode
+        // title
+        // content
+        // articleTypeCode
+        // isDisplay
+        // writer
+
+        
+
         $("#articleForm").submit(function(){
             if ($("#boardTypeCode").val() == "") {
                 alert("게시판 타입을 선택하세요.");
@@ -260,8 +269,29 @@
                 return false;
             }
 
-            return true;
+            var article = {
+            boardTypeCode: $('#boardTypeCode').val(),
+            title: $('#title').val(),
+            content: $('#content').val(),
+            articleTypeCode: $('#articleTypeCode').val(),
+            isDisplay: $('#isDisplay').val(),
+            writer: $('#writer').val(),
+            registDate: new Date(Date.now()).toLocaleString()
+        }
+        
+        $.post('/api/article/create', article, function(response){
+            console.log(response);
+
+            if (response.code == 200) {
+                alert('게시글이 등록되었습니다.');
+                location.href = '/article/list';
+            } else {
+                alert('게시글 등록에 실패하였습니다.');
+            }
         });
+            
+                return false;
+            });
     </script>
   </body>
 </html>
