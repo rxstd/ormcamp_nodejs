@@ -1,0 +1,108 @@
+
+1)미션소개
+-12/13일자 사용자 웹사이트 노드 프로젝트(라우팅/뷰)를 기반으로  사용자 채팅 템플릿과 메시징서비스-논리ERD 이미지 파일을 기반으로
+각종 라우터파일 기반 웹페이지 요청 및 응답 (MVC패턴기반) 처리 뷰화면들을 직접 구성해봅니다. 
+
+** 100% 서버측 기반 기술로 구현해야하며(MVC패턴) 프론트엔드 기술은 유효성 검증과 UX기능  개선정도만 구현하면 되며 
+RESTFul서비스 구축 및 프론트엔드 기능 구현은 하지 않으셔도 됩니다. ***
+
+
+2)프로젝트 정보
+
+
+2.1)ORM-Node\DAY17 폴더 생성후 DAY12폴더내  nodechatapp 프로젝트를  DAY17폴더로 복사해옵니다.
+step1) 기존 생성되어 있는 라우터파일의 모든 뷰파일을 템플릿과 논리ERD 이미지 파일을 기반으로 화면을 구성합니다.
+** 가상의 데이터를 만들어 라우팅메소드와 뷰파일간 연동할수 있으면 해보세요.(가능하신분들만)
+** 라우팅 메소드에서 호출하는 뷰파일은 모두 템플릿을 이용해 구성하셔야합니다.(bootstrap css framework기반 구성)
+** 처음엔 레이아웃 기술을 이용하지 말고 구현해보시고 나중에 layout기술을 적용해 공통페이지를 처리해보세요.
+
+step2)layout 페이지 기술을 프로젝트에 적용하세요.
+
+
+
+
+step3)로그인/메인 페이지 구현 안내  
+-템플릿내 login페이지 템플릿 소스를 이용하시면 됩니다.
+-레이아웃이 다르게 적용되어야하는 뷰파일의 경우(로그인뷰) 해당 뷰에서만 사용하는 추가 레이아웃 페이지를 생성하고 아래와같이 레이아웃파일을 선택 렌더링이 가능합니다. 
+
+TiP) res.render()메소드 이용해 뷰파일을 렌더링시 해당 뷰파일에서 사용할 레이아웃.ejs파일을 여러개 만들고 선택적으로 적용할수 있는 방법을 이용하면
+login.html 용 layout파일을 따로 만들고 login.ejs파일을 res.render호출시 지정한 레이아웃 파일로 선택 렌더링 할수 있습니다. 
+
+views\layout.ejs-디폴트레이아웃 파일
+views\authLayout.ejs-로그인 뷰파일 전용 레이아웃 파일
+
+
+//tip)특정 레이아웃 파일을 선택하여 레이아웃 지정하기 
+router.get('/login', async(req, res, next)=> {
+  res.render('login');
+});
+
+//tip)특정 레이아웃 파일을 선택하여 레이아웃 지정하기 
+router.get('/login', async(req, res, next)=> {
+  res.render('login',{layout:"authLayout"});
+});
+
+
+
+step4) 기본 MVC 패턴으로 구현해보시고 가능하신분들(옵션)은 프론트엔드/백엔드로 나눠
+public/frontend/login.html,entry.html,chat.html만들고 해당 페이지에서 백엔드와 RESTful연동되는 기능도 개발해보세요.
+
+
+
+
+2.2)각종 업무별 라우팅 파일생성
+-routes\index.js - 공통 페이지  제공(로그인,회원가입,암호찾기)
+-routes\channel.js - 채팅 페이지 정보관리 라우팅 기능 제공
+-routes\memberAPI.js -회원 정보관리 RESTful API 전용 라우팅 기능 제공
+-routes\channelAPI.js -채널/채팅 정보관리 RESTful API 전용 라우팅 기능 제공
+
+
+app.js 라우터 등록 및 기본주소 설정하기 
+-routes\index.js - http://localhost:3000/
+-routes\channel.js - http://localhost:3000/chat
+-routes\memberAPI.js - http://localhost:3001/api/member
+-routes\channelAPI.js - http://localhost:3001/api/channel
+
+
+
+2.3)업무별 라우팅별 라우팅 메소드 및 뷰파일 구성하기 
+-routes\index.js - 공통기능 제공(로그인,회원가입,암호찾기)
+ㄴrouter.get('/login'),views\login.ejs - 로그인 웹페이지 요청 및 응답 -authLayout.ejs를 레이아웃 페이지로 사용
+ㄴrouter.post('/login') -로그인 처리 요청 및 응답,로그인 완료 후 채팅 페이지 이동처리
+
+ㄴrouter.get('/entry'),views\entry.ejs - 회원가입 웹페이지 요청 및 응답 -authLayout.ejs를 레이아웃 페이지로 사용
+ㄴrouter.post('/entry') -회원가입 처리 요청 및 응답,회원가입 완료 후 로그인 페이지 이동처리
+
+ㄴrouter.get('/find'),views\find.ejs - 암호 찾기 웹페이지 요청 및 응답 -authLayout.ejs를 레이아웃 페이지로 사용
+ㄴrouter.post('/find') -암호찾기 처리 요청 및 응답,암호 찾기 완료 후 로그인 페이지 이동처리
+
+
+
+-routes\channel.js - 채팅 웹페이지 정보관리 라우팅 기능 제공-기본레이아웃 페이지 사용
+ㄴrouter.get('/'),views\chat\index.ejs
+
+
+-routes\memberAPI.js - 회원 정보 관리 RESTful API 라우팅 기능 제공
+http://localhost:3001/api/member
+ㄴrouter.get('/all') : 전체 회원목록 데이터 조회 
+ㄴrouter.post('/create') : 신규 회원정보 데이터 등록처리 
+ㄴrouter.post('/modify): 기존 회원정보 데이터 수정처리 
+ㄴrouter.post('/delete'),기존회원정보 데이터 삭제처리 
+ㄴrouter.get('/:mid') : 단일 회원정보 데이터 조회 
+
+-routes\channelAPI.js - 채널/채팅 정보 관리 RESTful API 라우팅 기능 제공
+http://localhost:3001/api/channel
+ㄴrouter.get('/all') : 전체 채널 목록 데이터 조회 
+ㄴrouter.post('/create') : 신규 채널정보 데이터 등록처리 
+ㄴrouter.post('/modify): 기존 채널정보 데이터 수정처리 
+ㄴrouter.post('/delete'),기존 채널정보 데이터 삭제처리 
+ㄴrouter.get('/:cid') : 단일 채널정보 데이터 조회 
+
+
+
+3)실습시 참고사항
+-.ejs파일에는 데이터 기반 기능 구현은 하지 않아도 됨
+-.ejs내 링크 정보들을 제공하여 페이지 URL간 이동이 자유롭게 되어야함
+-시간이 되시는분들은 <form>태그 및 데이터 연동하여 간략한 화면 기능도 구현해셔도 됩니다.
+-오전에는 개인 프로젝트에 진행해보시고 오후에는 팀별 프로젝트에 위 내용을 분담해서 협업으로 팀프로젝트를 완성해보세요. 
+-라우터별 관리 데이터 항목은 폴더내 메시징서비스-논리/물리 ERD PNG파일을 참고하셔도 됩니다.
