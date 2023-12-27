@@ -1,0 +1,75 @@
+2023 12 22 EJS 주요 문법 및 코드 스니펫 정리
+
+#### About EJS
+ ## EJS란?
+  - EJS는 Embedded JavaScript의 약자로, HTML코드 내에 JavaScript 코드를 삽입하여 사용할 수 있게 해주는 템플릿 엔진임.
+  - 템플릿 엔진이란, 템플릿을 렌더링하여 HTML을 생성해주는 도구임.
+  - 이는 PHP 또는 ASP의 작성 방식과 흡사하여, 기존에 웹 개발을 해본 사람이라면 쉽게 접근할 수 있음.
+  - EJS는 Controller단에서 넘겨준 데이터를 가지고 <% %> 태그를 사용하여 간단한 자바스크립트 백엔드 로직(if, while, for, foreach 등)을 작성할 수 있음. 단 이는 Client단에서 렌더링 되는 것이 아니라, Server단에서 렌더링 되는 것임. 즉, Client단에서는 자바스크립트 코드가 아닌, 렌더링된 HTML 코드가 보여지게 됨.
+
+ ## EJS의 역사
+  - EJS는 2010년에 TJ Holowaychuk에 의해 만들어짐.
+  - 2011년에 TJ Holowaychuk가 Express.js를 만들면서 Express.js의 기본 템플릿 엔진으로 채택됨.
+
+#### EJS의 자주 사용되는 문법
+
+<%	:: 'Scriptlet' 태그, 제어 흐름을 위한 것, 출력 없음
+<%_	:: 'Whitespace Slurping' Scriptlet 태그, 그 앞의 모든 공백을 제거
+<%=	:: 템플릿에 값을 출력 (HTML 이스케이프, 즉, HTML 태그로 인식되지 않음)
+<%-	:: 템플릿에 값을 출력 (HTML 이스케이프 없음, 즉, 원본 그대로 출력)
+<%#	:: 주석 태그, 실행 없음, 출력 없음
+<%%	:: 리터럴 '<%' 출력 (코드 실행이 아니라 '<%' 출력을 원할때)
+%>	:: 일반적인 닫는 태그
+-%>	:: Trim-mode ('newline slurp') 태그, 다음 줄 바꿈을 제거 (띄어쓰기는 제거하지 않음, 줄 바꿈만 제거)
+_%>	:: 'Whitespace Slurping' 닫는 태그, 그 뒤의 모든 공백을 제거. (줄 바꿈은 제거하지 않음, 띄어쓰기만 제거)
+
+#### EJS의 코드 스니펫
+
+##### 1. EJS에서의 변수 선언
+```javascript
+<% var a = 1; %>
+```
+
+##### 2. EJS에서의 조건문
+```javascript
+<% if (a === 1) { %>
+  <p>a is 1</p>
+<% } else { %>
+    <p>a is not 1</p>
+<% } %>
+```
+
+##### 3. EJS에서의 반복문
+```javascript
+<% for (var i = 0; i < 5; i++) { %>
+  <p><%= i %></p>
+<% } %>
+
+<% var arr = [1, 2, 3, 4, 5]; %>
+<% for (var i = 0; i < arr.length; i++) { %>
+  <p><%= arr[i] %></p>
+<% } %>
+```
+
+##### 4. EJS에서의 함수 선언
+```javascript
+<% function sum(a, b) { %>
+  <p><%= a + b %></p>
+<% } %>
+```
+
+##### 5. EJS에서의 함수 호출
+```javascript
+<% sum(1, 2); %>
+```
+
+##### 6. EJS에서의 객체 선언
+```javascript
+<% var obj = { a: 1, b: 2 }; %>
+```
+
+##### 7. EJS에서의 객체 호출
+```javascript
+<% obj.a %>
+```
+

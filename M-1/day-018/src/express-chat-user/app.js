@@ -4,15 +4,25 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-var indexRouter = require("./routes/index");
-var adminRouter = require("./routes/admin");
-var articleRouter = require("./routes/article");
-var messageRouter = require("./routes/message");
-var memberRouter = require("./routes/member");
-var channelRouter = require("./routes/channel");
+const layout = require("express-ejs-layouts");
 
-var layout = require("express-ejs-layouts");
+var indexRouter = require("./routes/index");
+var channelRouter = require("./routes/channel");
+var memberAPIRouter = require("./routes/memberAPI");
+var channelAPIRouter = require("./routes/channelAPI");
+
+const session = require("express-session");
+
 var app = express();
+
+app.use(
+  session({
+    secret: "ormcamp",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }, // Note: In production, set this to true and use HTTPS
+  })
+);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -24,19 +34,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-
 app.use(layout);
 app.set("layout", "layout");
 app.set("layout extractScripts", true);
-app.set("layout extractStyles", true);
-app.set("layout extractMetas", true);
 
-app.use("/admin", adminRouter);
-app.use("/article", articleRouter);
-app.use("/message", messageRouter);
-app.use("/member", memberRouter);
-app.use("/channel", channelRouter);
+app.use("/", indexRouter);
+app.use("/chat/", channelRouter);
+app.use("/api/member/", memberAPIRouter);
+app.use("/api/channel/", channelAPIRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

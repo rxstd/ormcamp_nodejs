@@ -4,6 +4,18 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+var sequelize = require("./models/index").sequelize;
+
+// DB연결
+sequelize
+  .sync()
+  .then(() => {
+    console.log("DB 연결 성공");
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
 var indexRouter = require("./routes/index");
 var adminRouter = require("./routes/admin");
 var articleRouter = require("./routes/article");

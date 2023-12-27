@@ -4,15 +4,25 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-var indexRouter = require("./routes/index");
-var adminRouter = require("./routes/admin");
-var articleRouter = require("./routes/article");
-var messageRouter = require("./routes/message");
-var memberRouter = require("./routes/member");
-var channelRouter = require("./routes/channel");
+require("dotenv").config();
 
-var layout = require("express-ejs-layouts");
+var sequelize = require("./models/index").sequelize;
+
+var indexRouter = require("./routes/index");
+var memberRouter = require("./routes/member");
+var memberAPIRouter = require("./routes/memberAPI");
+
 var app = express();
+
+// DB연결
+sequelize
+  .sync()
+  .then(() => {
+    console.log("DB 연결 성공");
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -25,18 +35,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-
-app.use(layout);
-app.set("layout", "layout");
-app.set("layout extractScripts", true);
-app.set("layout extractStyles", true);
-app.set("layout extractMetas", true);
-
-app.use("/admin", adminRouter);
-app.use("/article", articleRouter);
-app.use("/message", messageRouter);
 app.use("/member", memberRouter);
-app.use("/channel", channelRouter);
+app.use("/api/member", memberAPIRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -55,3 +55,6 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
+// npm install mysql2 sequelize
+// npm install -g sequelize-cli
+// sequelize init

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>로그인</title>
+  </head>
+
+  <body>
+    <input type="radio" name="type" id="type" value="ajax" checked /> Ajax
+    <input type="radio" name="type" id="type" value="ejs" /> EJS<br /><br />
+    <form action="/member/login" method="post" onsubmit="return checkType()">
+      메일주소:<input type="text" name="email" value="<%=email%>" />
+      <br />
+      암호:<input type="password" name="password" value="<%=password%>" />
+      <p style="color: red" id="message"><%=resultMsg%></p>
+      <br />
+      <button type="button" onclick="checkType()">로그인</button>
+    </form>
+
+    <script>
+      function checkType() {
+        let type = document.getElementById("type").value;
+        if (type == "ajax") {
+          // ajax without jquery
+          let email = document.getElementsByName("email")[0].value;
+          let password = document.getElementsByName("password")[0].value;
+
+          if (email == "") {
+            alert("메일주소를 입력하세요.");
+            return false;
+          }
+
+          if (password == "") {
+            alert("암호를 입력하세요.");
+            return false;
+          }
+
+          let xhr = new XMLHttpRequest();
+          xhr.open("POST", "/api/member/login");
+          xhr.setRequestHeader("Content-Type", "application/json");
+          xhr.send(
+            JSON.stringify({
+              email: email,
+              password: password,
+            })
+          );
+
+          return false;
+        }
+
+        if (type == "ejs") {
+          let email = document.getElementsByName("email")[0].value;
+          let password = document.getElementsByName("password")[0].value;
+
+          if (email == "") {
+            alert("메일주소를 입력하세요.");
+            return false;
+          }
+
+          if (password == "") {
+            alert("암호를 입력하세요.");
+            return false;
+          }
+
+          document.getElementsByTagName("form")[0].submit();
+        }
+      }
+
+      let result = "<%=resultMsg%>";
+      if (result != "") {
+        //alert(result);
+        document.getElementById("message").innerHTML = result;
+      }
+    </script>
+  </body>
+</html>
