@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
-        comment: "관리자 멤버 식별자",
+        comment: "관리자 멤버 ID",
       },
       company_code: {
         type: DataTypes.INTEGER,
@@ -52,7 +52,7 @@ module.exports = function (sequelize, DataTypes) {
       reg_user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        comment: "등록자 식별자",
+        comment: "등록자 ID",
       },
       edit_date: {
         type: DataTypes.DATE,

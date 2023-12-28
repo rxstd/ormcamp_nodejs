@@ -9,7 +9,7 @@ module.exports = function (sequelize, DataTypes) {
           model: "channel",
           key: "channel_id",
         },
-        comment: "채널 식별자",
+        comment: "채널 ID",
       },
       member_id: {
         type: DataTypes.INTEGER,
@@ -18,7 +18,7 @@ module.exports = function (sequelize, DataTypes) {
           model: "member",
           key: "member_id",
         },
-        comment: "회원 식별자",
+        comment: "회원 ID",
       },
       nick_name: {
         type: DataTypes.STRING(100),

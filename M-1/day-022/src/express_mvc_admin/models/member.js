@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
-        comment: "회원 식별자",
+        comment: "회원 ID",
       },
       email: {
         type: DataTypes.STRING(100),
@@ -57,7 +57,7 @@ module.exports = function (sequelize, DataTypes) {
       reg_member_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        comment: "등록 회원 식별자",
+        comment: "등록 회원 ID",
       },
       edit_date: {
         type: DataTypes.DATE,
@@ -67,7 +67,7 @@ module.exports = function (sequelize, DataTypes) {
       edit_member_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        comment: "수정 회원 식별자",
+        comment: "수정 회원 ID",
       },
     },
     {
