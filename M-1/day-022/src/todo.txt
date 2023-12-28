@@ -1,0 +1,143 @@
+
+
+1)미션소개
+-12/19일자 관리자 웹사이트 실습결과 노드 프로젝트(라우팅/뷰)에 
+ORM DB프로그래밍 프로젝트 환경을 구성하고 각종 라우터 파일에 DB프로그래밍(CRUD)기능을 구현해봅니다.
+
+
+모델생성시 메시징서비스-물리ERD 이미지 파일을 기반으로
+모델들을 만들고 해당 모델기반으로 화면(View)와 라우팅(Controller)기능을 결합해 실제 DB 연동기능을 모두 구현합니다. 
+
+  
+
+
+2)프로젝트 정보
+
+2.0)ORM-Node\DAY22폴더를 생성하고 DAY16 폴더내의 관리자 웹사이트 프로젝트를 복사해서 가져옵니다.(node_modules폴더제외-npm i로 복원)
+
+**중요: bin/www.js열고 서비스 기본포트 변경: 3001 로 변경
+**관리자 사이트는 http://localhost:3001 로 서비스됨
+
+
+step1)해당 프로젝트에 ORM DB 프로그래밍 환경을 구성합니다. 
+
+
+step2)models폴더내에 index.js를 구성하고 하기 각종 모델 파일을 구현합니다.
+-모델생성시 메시징서비스-물리ERD 이미지 파일을 기반으로 구현합니다.
+-models\member.js  - member 테이블생성: 일반사용자 정보 : 사용자 채팅 웹사이트의 회원가입시 여기에 등록
+-models\admin.js -admin_member 테이블생성: 관리자 웹사이트 관리자계정정보 관리 용
+-models\channel.js -channel테이블생성
+-models\channelMessage.js -channel_msg 테이블 생성
+-models\channelMember.js -channel_member 테이블 생성
+-models\article.js -article 테이블 생성 
+-models\articleFile.js -article_file 테이블 생성 
+
+
+-models\index.js내 상기 모델을 하기 속성명으로 정의 
+db.Member : 일반사용자 정보 : 사용자 채팅 웹사이트의 회원가입시 여기에 등록
+db.Admin  : 관리자 웹사이트 관리자계정정보 관리 용
+db.Channel
+db.ChannelMessage
+db.ChannelMember
+db.Article
+db.ArticleFile
+
+
+
+
+step3) layout 페이지의 좌측 메뉴를 정리합니다.
+ㅁ관리자계정관리: 관리자 목록 페이지 링크
+ㅁ게시글정보관리: 게시글 목록 페이지 링크
+ㅁ사용자계정관리: 사용자 목록 페이지 링크
+ㅁ채널정보관리-채널정보 목록 페이지 링크
+ㅁ메시지정보관리-메시지 목록 페이지 링크
+
+
+
+step4)로그인/메인 페이지 구현 안내  
+-관리자 계정정보를 이용해 로그인 기능을 구현해보세요.
+-관리자 계정 아이디/암호가 일치하면 메인/대시보드 페이지로 이동하게 합니다. 
+
+
+
+2.2)각종 업무별 라우팅 파일 DB프로그래밍 구현
+-ORM기반으로 CRUD를 구현하는것에 초점을 맞춰 진행해보세요.
+-ChannelMember,ArticleFile은 별도 라우팅 기능 및 화면은 구현하지 마세요.
+
+-routes\index.js - 공통기능 제공(관리자 사이트 로그인/메인-대시보드)
+-routes\admin.js - 관리자 사이트 관리자 계정 정보관리 라우팅 기능 제공
+-routes\article.js - 게시글 정보관리 라우팅 기능 제공
+-routes\member.js - 사용자 계정 정보(사용자 사이트에서 가입한 사용자정보) 관리 라우팅 기능 제공
+-routes\channel.js - 채팅방 정보관리 라우팅 기능 제공
+-routes\message.js - 채팅 메시지 이력 정보관리 라우팅 기능 제공
+
+
+app.js 라우터 등록 및 기본주소 설정하기 
+-routes\index.js - http://localhost:3001/
+-routes\admin.js - http://localhost:3001/admin
+-routes\article.js - http://localhost:3001/article
+-routes\member.js - http://localhost:3001/member
+-routes\channel.js - http://localhost:3001/channel
+-routes\message.js - http://localhost:3001/message
+
+
+
+2.3)업무별 라우팅별 라우팅 메소드 및 뷰파일 구성하기-템플릿으로 구성할것... 
+-routes\index.js - 공통기능 제공(관리자 사이트 로그인/메인-대시보드)
+ㄴrouter.get('/login'),views\login.ejs - 로그인 웹페이지 요청 및 응답 
+ㄴrouter.post('/login') -로그인 처리 요청 및 응답,로그인 완료 후 메인 페이지 이동처리
+ㄴrouter.get('/'),views\index.ejs - 로그인 후 접속할 메인 페이지 요청 및 응답 
+
+
+
+-routes\admin.js - 관리자 사이트 관리자 계정 정보관리 라우팅 기능 제공
+ㄴrouter.get('/list'),views\admin\list.ejs
+ㄴrouter.get('/create'),views\admin\create.ejs
+ㄴrouter.post('/create'),목록페이지 이동처리 
+ㄴrouter.get('/modify'),views\admin\modify.ejs
+ㄴrouter.post('/modify'),목록페이지 이동처리
+ㄴrouter.get('/delete'),목록페이지 이동처리 
+
+
+-routes\article.js - 게시글 정보관리 라우팅 기능 제공
+ㄴrouter.get('/list'),views\article\list.ejs
+ㄴrouter.get('/create'),views\article\create.ejs
+ㄴrouter.post('/create'),목록페이지 이동처리 
+ㄴrouter.get('/modify'),views\article\modify.ejs
+ㄴrouter.post('/modify'),목록페이지 이동처리
+ㄴrouter.get('/delete'),목록페이지 이동처리 
+
+
+-routes\member.js - 사용자 계정 정보(사용자 사이트에서 가입한 사용자정보) 관리 라우팅 기능 제공
+ㄴrouter.get('/list'),views\member\list.ejs
+ㄴrouter.get('/create'),views\member\create.ejs
+ㄴrouter.post('/create'),목록페이지 이동처리 
+ㄴrouter.get('/modify'),views\member\modify.ejs
+ㄴrouter.post('/modify'),목록페이지 이동처리
+ㄴrouter.get('/delete'),목록페이지 이동처리 
+
+
+-routes\channel.js - 채팅방 정보관리 라우팅 기능 제공
+ㄴrouter.get('/list'),views\channel\list.ejs
+ㄴrouter.get('/create'),views\channel\create.ejs
+ㄴrouter.post('/create'),목록페이지 이동처리 
+ㄴrouter.get('/modify'),views\channel\modify.ejs
+ㄴrouter.post('/modify'),목록페이지 이동처리
+ㄴrouter.get('/delete'),목록페이지 이동처리 
+
+
+
+-routes\message.js - 채팅 메시지 이력 정보관리 라우팅 기능 제공
+ㄴrouter.get('/list'),views\message\list.ejs
+ㄴrouter.get('/create'),views\message\create.ejs
+ㄴrouter.post('/create'),목록페이지 이동처리 
+ㄴrouter.get('/modify'),views\message\modify.ejs
+ㄴrouter.post('/modify'),목록페이지 이동처리
+ㄴrouter.get('/delete'),목록페이지 이동처리
+
+
+
+3)실습시 참고사항
+-ERD 논리모델을 참고하여 적절하게 화면(콤보박스,텍스트박스)을 구성하세요.
+-ORM기반으로 CRUD를 구현하는것에 초점을 맞춰 진행해보세요.
+-ChannelMember,ArticleFile은 별도 라우팅 기능 및 화면은 구현하지 마세요.
