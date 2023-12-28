@@ -51,14 +51,58 @@ router.get("/create", function (req, res, next) {
 });
 
 router.post("/create", function (req, res, next) {
+  var boardTypeCode = req.body.boardTypeCode;
+  var title = req.body.title;
+  var contents = req.body.contents;
+  var articleTypeCode = req.body.articleTypeCode;
+  var isDisplayCode = req.body.isDisplayCode;
+  var register = req.body.register;
+
+  var article = {
+    board_type_code: boardTypeCode,
+    title,
+    contents,
+    article_type_code: articleTypeCode,
+    is_display_code: isDisplayCode,
+    reg_member_id: register,
+    reg_date: Date.now(),
+  };
+
   res.redirect("/article/list");
 });
 
-router.get("/modify", function (req, res, next) {
-  res.render("article/modify");
+router.get("/modify/:aid", async function (req, res, next) {
+  var articleIdx = req.params.aid;
+
+  var article = await db.Article.findOne({ where: { article_id: articleIdx } });
+
+  res.render("article/modify", { article: article });
 });
 
-router.post("/modify", function (req, res, next) {
+router.post("/modify/:aid", function (req, res, next) {
+  var articleIdx = req.params.aid;
+
+  var boardTypeCode = req.body.boardTypeCode;
+  var title = req.body.title;
+  var contents = req.body.content;
+  var articleTypeCode = req.body.articleTypeCode;
+  var isDisplayCode = req.body.isDisplay;
+  var register = req.body.writer;
+
+  var article = {
+    board_type_code: boardTypeCode,
+    title,
+    contents,
+    article_type_code: articleTypeCode,
+    is_display_code: isDisplayCode,
+    reg_member_id: register,
+    reg_date: Date.now(),
+  };
+
+  const result = db.Article.update(article, {
+    where: { article_id: articleIdx },
+  });
+
   res.redirect("/article/list");
 });
 

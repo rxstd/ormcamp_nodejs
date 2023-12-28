@@ -1,4 +1,8 @@
-<form action="modify" method="post" id="articleForm">
+<form
+  action="/article/modify/<%=article.article_id%>"
+  method="post"
+  id="articleForm"
+>
   <div class="ibox-content m-b-sm border-bottom">
     <div class="row">
       <div class="col-sm-4">
@@ -73,3 +77,14 @@
     <a href="list" class="btn btn-info">목록</a>
   </div>
 </form>
+
+<script>
+  $(document).ready(function () {
+    $("#boardTypeCode").val("<%= article.board_type_code %>");
+    $("#title").val("<%= article.title %>");
+    $("#content").val("<%= article.contents %>");
+    $("#articleTypeCode").val("<%= article.article_type_code %>");
+    $("#isDisplay").val("<%= article.is_display_code %>");
+    $("#writer").val("<%= article.reg_member_id %>");
+  });
+</script>

@@ -89,6 +89,19 @@
               </tr>
             </thead>
             <tbody class="hoverTblBody" id="list_table">
+              <% for (var i = 0; i < articles.length; i++) { %>
+              <tr>
+                <td><%= articles[i].article_id %></td>
+                <td><%= articles[i].board_type_code %></td>
+                <td>
+                  <a href="modify/<%= articles[i].article_id %>"><%= articles[i].title %></a>
+                </td>
+                <td><%= articles[i].view_count %></td>
+                <td><%= articles[i].ip_address %></td>
+                <td><%= articles[i].is_display_code %></td>
+                <td><%= articles[i].reg_date %></td>
+              </tr>
+              <% } %>
             </tbody>
           </table>
         </div>
